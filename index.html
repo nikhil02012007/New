@@ -1,77 +1,48 @@
+<?php
+include 'db_connect.php'; // Include database connection file
+
+$sql = "SELECT id, username, email FROM users";
+$result = $conn->query($sql);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Chat App</title>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        #chat-box { width: 400px; height: 300px; border: 1px solid #ccc; padding: 10px; overflow-y: scroll; }
-        #message-input { width: 300px; padding: 10px; }
-        #send-button { padding: 10px 20px; }
-        .message { margin-bottom: 10px; }
-        .message span { font-weight: bold; }
-    </style>
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js"></script>
+    <title>PHP MySQL Database</title>
 </head>
 <body>
-    <h1>Simple Chat</h1>
-    <div id="chat-box"></div>
-    <input type="text" id="message-input" placeholder="Type a message...">
-    <button id="send-button">Send</button>
 
-    <script>
-        // Firebase configuration
-        const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-            databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT_ID.appspot.com",
-            messagingSenderId: "YOUR_SENDER_ID",
-            appId: "YOUR_APP_ID"
-        };
+<h2>User List</h2>
 
-        // Initialize Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const database = firebase.database();
-
-        // Elements
-        const chatBox = document.getElementById('chat-box');
-        const messageInput = document.getElementById('message-input');
-        const sendButton = document.getElementById('send-button');
-
-        // Function to send message
-        function sendMessage() {
-            const message = messageInput.value;
-            if (message.trim() !== "") {
-                database.ref('messages').push({
-                    user: "User", // You can replace this with the actual user's name or ID
-                    message: message
-                });
-                messageInput.value = "";
-            }
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Email</th>
+    </tr>
+    
+    <?php
+    if ($result->num_rows > 0) {
+        // Output data of each row
+        while($row = $result->fetch_assoc()) {
+            echo "<tr>
+                    <td>" . $row["id"] . "</td>
+                    <td>" . $row["username"] . "</td>
+                    <td>" . $row["email"] . "</td>
+                  </tr>";
         }
+    } else {
+        echo "<tr><td colspan='3'>No records found</td></tr>";
+    }
+    ?>
+</table>
 
-        // Function to display messages
-        database.ref('messages').on('child_added', function(snapshot) {
-            const msg = snapshot.val();
-            const msgElement = document.createElement('div');
-            msgElement.className = 'message';
-            msgElement.innerHTML = `<span>${msg.user}:</span> ${msg.message}`;
-            chatBox.appendChild(msgElement);
-            chatBox.scrollTop = chatBox.scrollHeight;
-        });
-
-        // Event listener for sending message
-        sendButton.addEventListener('click', sendMessage);
-        messageInput.addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                sendMessage();
-            }
-        });
-    </script>
 </body>
 </html>
+
+<?php
+$conn->close(); // Close connection
+?>
