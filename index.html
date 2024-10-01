@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Code Check</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .result {
+            margin-top: 20px;
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Enter Secret Code</h2>
+        <form id="secretForm">
+            <input type="number" id="secretCode" placeholder="Enter secret code" required>
+            <button type="submit">Submit</button>
+        </form>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('secretForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const code = document.getElementById('secretCode').value;
+            const correctCode = '98970'; // Replace this with your actual secret code
+
+            if (code === correctCode) {
+                document.getElementById('result').innerHTML = 'ID: mtautocad1@gmail.com <br> Password: Mohittiwari@1';
+            } else {
+                document.getElementById('result').innerHTML = 'Incorrect code. Try again.';
+            }
+        });
+    </script>
+</body>
+</html>
