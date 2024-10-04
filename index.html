@@ -1,53 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secret Code Check</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-        }
-        .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .result {
-            margin-top: 20px;
-            color: green;
-            font-weight: bold;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Educational Blog</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h2>Enter Secret Code</h2>
-        <form id="secretForm">
-            <input type="number" id="secretCode" placeholder="Enter secret code" required>
-            <button type="submit">Submit</button>
-        </form>
-        <div id="result" class="result"></div>
-    </div>
+  <header>
+    <h1>Educational Blog</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="login.html">Admin</a>
+    </nav>
+  </header>
 
-    <script>
-        document.getElementById('secretForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const code = document.getElementById('secretCode').value;
-            const correctCode = '98970'; // Replace this with your actual secret code
+  <section class="post-section" id="post-section">
+    <h2>Recent Posts</h2>
+    <div id="post-list"></div>
+  </section>
 
-            if (code === correctCode) {
-                document.getElementById('result').innerHTML = 'ID: mtautocad1@gmail.com <br> Password: Mohittiwari@1';
-            } else {
-                document.getElementById('result').innerHTML = 'Incorrect code. Try again.';
-            }
-        });
-    </script>
+  <footer>
+    <p>&copy; 2024 Educational Blog. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
